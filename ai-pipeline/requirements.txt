@@ -1,0 +1,8 @@
+groq
+google-generativeai
+python-dotenv
+pydub
+fastapi
+uvicorn
+python-multipart
+aksharamukha

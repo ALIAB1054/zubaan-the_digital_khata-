@@ -1,0 +1,97 @@
+<!--
+Test page for Person 3 (frontend) — shows exactly how to call the API
+from plain JavaScript. Open this file directly in a browser (or serve it)
+while api_server.py is running, and click the button to test end to end.
+
+This is NOT part of the final app UI — it's a working reference so
+Person 3 can see the real request/response shape before building the
+actual mic-button interface.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Zubaan API Test Page</title>
+</head>
+<body style="font-family: sans-serif; max-width: 500px; margin: 40px auto;">
+  <h2>Zubaan Pipeline — API Test</h2>
+
+  <p>1. Record a short audio clip below.</p>
+  <button id="recordBtn">🎤 Start Recording</button>
+  <button id="stopBtn" disabled>⏹ Stop</button>
+
+  <p>2. What language did you speak in? (forcing this gives more reliable script output)</p>
+  <select id="speechLanguage">
+    <option value="urdu" selected>Urdu</option>
+    <option value="hindi">Hindi</option>
+    <option value="english">English</option>
+    <option value="arabic">Arabic</option>
+    <option value="punjabi">Punjabi</option>
+  </select>
+
+  <p>3. What language should the response be in?</p>
+  <select id="targetLanguage">
+    <option value="Urdu">Urdu</option>
+    <option value="Hindi">Hindi</option>
+    <option value="English">English</option>
+    <option value="Arabic">Arabic</option>
+    <option value="Punjabi">Punjabi</option>
+  </select>
+
+  <p>4. Result:</p>
+  <pre id="result" style="background: #f4f4f4; padding: 12px; white-space: pre-wrap;"></pre>
+
+  <script>
+    let mediaRecorder;
+    let audioChunks = [];
+
+    const recordBtn = document.getElementById("recordBtn");
+    const stopBtn = document.getElementById("stopBtn");
+    const resultBox = document.getElementById("result");
+    const speechLanguageSelect = document.getElementById("speechLanguage");
+    const targetLanguageSelect = document.getElementById("targetLanguage");
+
+    recordBtn.onclick = async () => {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaRecorder = new MediaRecorder(stream);
+      audioChunks = [];
+
+      mediaRecorder.ondataavailable = (e) => audioChunks.push(e.data);
+      mediaRecorder.onstop = sendToApi;
+
+      mediaRecorder.start();
+      recordBtn.disabled = true;
+      stopBtn.disabled = false;
+      resultBox.textContent = "Recording...";
+    };
+
+    stopBtn.onclick = () => {
+      mediaRecorder.stop();
+      recordBtn.disabled = false;
+      stopBtn.disabled = true;
+    };
+
+    async function sendToApi() {
+      resultBox.textContent = "Processing...";
+
+      const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
+
+      const formData = new FormData();
+      formData.append("audio", audioBlob, "recording.webm");
+      formData.append("speech_language", speechLanguageSelect.value);
+      formData.append("target_language", targetLanguageSelect.value);
+
+      try {
+        const response = await fetch("http://localhost:8000/process-audio", {
+          method: "POST",
+          body: formData,
+        });
+        const data = await response.json();
+        resultBox.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        resultBox.textContent = "Error: " + err.message;
+      }
+    }
+  </script>
+</body>
+</html>
