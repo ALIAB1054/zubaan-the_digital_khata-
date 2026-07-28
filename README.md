@@ -48,3 +48,8 @@ Ensure you have Python 3.10+ installed on your system.
 
 ```bash
 python --version
+### 2. Clone the Repository
+
+```bash
+git clone [https://github.com/ALIAB1054/zubaan-the_digital_khata.git](https://github.com/ALIAB1054/zubaan-the_digital_khata.git)
+cd zubaan-the_digital_khata
