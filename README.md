@@ -102,3 +102,14 @@ This project is licensed under the MIT License - see the LICENSE file for detail
    [Shields.io](https://shields.io/) se aap customize badges banasakte hain (jaise build status, version, stars etc).
 3. **Repository Details Sidebar**:
    GitHub repo page ke right side par **About** section ke sath ⚙️ icon par click ka
+⚠️ Known Limitations
+
+    Requires standard system audio drivers and ffmpeg binaries pre-configured on host platforms.
+
+    Heavy GPU acceleration (CUDA) is recommended for real-time transcription on larger parameter models.
+
+    Highly distorted audio with severe clipping may require additional front-end filtering.
+
+🤝 Team / Credits
+
+Built with ❤️ by Rashid Aziz and project collaborators.
