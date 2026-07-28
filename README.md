@@ -101,4 +101,4 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 ## 👥 Team / Credits
 
-Built with ❤️ by **Rashid Aziz** and project collaborators.
+Built with ❤️ by team **BC Crew**.
