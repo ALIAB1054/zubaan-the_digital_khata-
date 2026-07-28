@@ -48,8 +48,57 @@ Ensure you have Python 3.10+ installed on your system.
 
 ```bash
 python --version
-### 2. Clone the Repository
+2. Installation & Setup
 
-```bash
-git clone [https://github.com/ALIAB1054/zubaan-the_digital_khata.git](https://github.com/ALIAB1054/zubaan-the_digital_khata.git)
-cd zubaan-the_digital_khata
+Clone the repository and install necessary dependencies:
+Bash
+
+# Clone repository
+git clone [https://github.com/ALIAB1054/zubaan-the_digital_khata-.git](https://github.com/ALIAB1054/zubaan-the_digital_khata-.git)
+
+# Navigate to project directory
+cd zubaan-the_digital_khata-
+
+# Create & activate virtual environment (optional but recommended)
+python -m venv venv
+# On Windows:
+venv\Scripts\activate
+
+# Install requirements
+pip install -r requirements.txt
+
+3. Run the Server
+
+Start the API pipeline server locally:
+Bash
+
+python ai-pipeline/api_server.py
+
+📂 Project Architecture
+Plaintext
+
+zubaan-the_digital_khata/
+├── ai-pipeline/          # Speech processing & Whisper API server
+├── backend/              # Supabase & DB sync modules
+├── recorded_audios/      # Audio buffer and temporary wave logs
+└── ledger_db.json        # Local fallback database store
+
+🤝 Contributors
+
+Thanks to the contributors behind this project!
+📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+
+---
+
+### Step 3: Pro-Tips for Extra Visual Polish
+
+1. **Architecture Diagram / Screenshots**:
+   Repo ke andar ek `assets/` folder banayein, usme demo screenshot ya UI ka workflow image daalein. README mein insert karne ke liye:
+   `![Demo](assets/demo.png)`
+2. **Badges Customized**:
+   [Shields.io](https://shields.io/) se aap customize badges banasakte hain (jaise build status, version, stars etc).
+3. **Repository Details Sidebar**:
+   GitHub repo page ke right side par **About** section ke sath ⚙️ icon par click ka
