@@ -1,0 +1,47 @@
+[
+    {
+        "customer": "Mr. Hamid",
+        "items": "2.5 kg oil",
+        "type": "cash_sale",
+        "amount": 585.0,
+        "transcript": "2.5 kg oil to Mr. Hamid at the rate of 585 rupees on cash.",
+        "audio_filename": "mr__hamid_20260724_095028.webm",
+        "timestamp": "2026-07-24 09:50:28"
+    },
+    {
+        "customer": "Ayesha",
+        "items": "6 liter oil (Paid/Cleared)",
+        "type": "cash_sale",
+        "amount": 1.0,
+        "transcript": "Payment Received: Aisha has paid only one rupee.",
+        "audio_filename": "ayesha_20260724_095136.webm",
+        "timestamp": "2026-07-24 09:51:36"
+    },
+    {
+        "customer": "Ahmed Dawood",
+        "items": "3.5 kg rice",
+        "type": "cash_sale",
+        "amount": 1485.0,
+        "transcript": "Provide 3.5 kg rise to Ahmed Dawood at the rate of Rs. 1485 on cash.",
+        "audio_filename": "ahmed_dawood_20260724_095342.webm",
+        "timestamp": "2026-07-24 09:53:42"
+    },
+    {
+        "customer": "Uzair",
+        "items": "2 kg sugar",
+        "type": "cash_sale",
+        "amount": 0.0,
+        "transcript": "Provide 2 kg, sugar to 0.",
+        "audio_filename": "uzair_20260724_095403.webm",
+        "timestamp": "2026-07-24 09:54:03"
+    },
+    {
+        "customer": "Talha",
+        "items": "2 kg sugar",
+        "type": "cash_sale",
+        "amount": 0.0,
+        "transcript": "Provide 2 kg sugar 2 talha.",
+        "audio_filename": "talha_20260724_095444.webm",
+        "timestamp": "2026-07-24 09:54:44"
+    }
+]

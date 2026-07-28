@@ -1,0 +1,29 @@
+[
+    {
+        "customer": "Ahmad",
+        "items": "2 kilograms of sugar (Paid/Cleared)",
+        "type": "cash_sale",
+        "amount": 50.0,
+        "transcript": "Payment Received: Ahmed paid 200 rupees.",
+        "audio_filename": "ahmad_20260727_180104.webm",
+        "timestamp": "2026-07-27 18:01:04"
+    },
+    {
+        "customer": "Muhammad Ali",
+        "items": "2 biscuits",
+        "type": "udhaar",
+        "amount": 100.0,
+        "transcript": "Provide two biscuits to Muhammad Ali at the rate of 100 rupees on udhaar.",
+        "audio_filename": "muhammad_ali_20260728_161657.webm",
+        "timestamp": "2026-07-28 16:16:57"
+    },
+    {
+        "customer": "Hamza",
+        "items": "2 kg oil",
+        "type": "udhaar",
+        "amount": 100.0,
+        "transcript": "Payment Received: Hamza paid 400 rupees cash.",
+        "audio_filename": "hamza_20260728_162009.webm",
+        "timestamp": "2026-07-28 16:20:09"
+    }
+]

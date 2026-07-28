@@ -1,0 +1,38 @@
+[
+    {
+        "customer": "Uzair",
+        "items": "None",
+        "type": "cash_sale",
+        "amount": 500.0,
+        "transcript": "Huzair نے 500 روپے کیس جمع کروا دیئے.",
+        "audio_filename": "uzair_20260719_171421.webm",
+        "timestamp": "2026-07-19 17:14:21"
+    },
+    {
+        "customer": "Hamza",
+        "items": "3 kg sugar ",
+        "type": "udhaar",
+        "amount": 0.0,
+        "transcript": "Hamza ko tín kilosee ni Uzair par deydo.",
+        "audio_filename": "hamza_20260719_171455.webm",
+        "timestamp": "2026-07-19 17:14:55"
+    },
+    {
+        "customer": "Ali",
+        "items": "milk",
+        "type": "cash_sale",
+        "amount": 600.0,
+        "transcript": "Ali ko 600 rupay mein doodh doodh doodh doodh.",
+        "audio_filename": "ali_20260719_172259.webm",
+        "timestamp": "2026-07-19 17:22:59"
+    },
+    {
+        "customer": "Hamza",
+        "items": "Milk",
+        "type": "udhaar",
+        "amount": 0.0,
+        "transcript": "Hamza ko do liter, doodh, dee do.",
+        "audio_filename": "hamza_20260719_172317.webm",
+        "timestamp": "2026-07-19 17:23:17"
+    }
+]

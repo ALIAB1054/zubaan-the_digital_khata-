@@ -1,0 +1,29 @@
+[
+    {
+        "customer": "Ali",
+        "items": "5 kg sugar (Paid/Cleared)",
+        "type": "cash_sale",
+        "amount": 10.0,
+        "transcript": "Payment Received: Ali paid 10 rupees.",
+        "audio_filename": "ali_20260727_191154.webm",
+        "timestamp": "2026-07-27 19:11:54"
+    },
+    {
+        "customer": "Aisha",
+        "items": "4 kg rice (Paid/Cleared)",
+        "type": "cash_sale",
+        "amount": 100.0,
+        "transcript": "Payment Received: Aisha paid 100 rupees.",
+        "audio_filename": "aisha_20260727_191311.webm",
+        "timestamp": "2026-07-27 19:13:11"
+    },
+    {
+        "customer": "Rashid Aziz",
+        "items": "2 kg milk",
+        "type": "cash_sale",
+        "amount": 510.0,
+        "transcript": "Pied 2 kg milk to Rashid Aziz at the rate of 510 rupees on cash.",
+        "audio_filename": "rashid_aziz_20260727_191410.webm",
+        "timestamp": "2026-07-27 19:14:10"
+    }
+]

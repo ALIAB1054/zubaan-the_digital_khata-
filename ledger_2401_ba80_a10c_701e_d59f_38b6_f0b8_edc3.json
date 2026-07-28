@@ -1,0 +1,20 @@
+[
+    {
+        "customer": "Ali",
+        "items": "5 kg oil",
+        "type": "cash_sale",
+        "amount": 600.0,
+        "transcript": "Ali ko 5 kg oil 600 rupay mein cash mein dhe do.",
+        "audio_filename": "ali_20260724_080802.webm",
+        "timestamp": "2026-07-24 08:08:02"
+    },
+    {
+        "customer": "Hamza",
+        "items": "2 kg oil",
+        "type": "cash_sale",
+        "amount": 650.0,
+        "transcript": "Khamzah ko 2 kg oil 650 rupay mein dhe dhu.",
+        "audio_filename": "hamza_20260724_081228.webm",
+        "timestamp": "2026-07-24 08:12:28"
+    }
+]

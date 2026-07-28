@@ -1,0 +1,29 @@
+[
+    {
+        "customer": "John",
+        "items": "Sugar ",
+        "type": "udhaar",
+        "amount": 350.0,
+        "transcript": "Provide 5 kg sugar to John at the rate of 350, please.",
+        "audio_filename": "john_20260719_173415.webm",
+        "timestamp": "2026-07-19 17:34:15"
+    },
+    {
+        "customer": "Ali",
+        "items": "sugar",
+        "type": "udhaar",
+        "amount": 350.0,
+        "transcript": "Amount is 350 rupees. Product item is sugar and customer name is Ali. Provide on Udhar.",
+        "audio_filename": "ali_20260719_192336.webm",
+        "timestamp": "2026-07-19 19:23:36"
+    },
+    {
+        "customer": "Dawood",
+        "items": "[object Object]",
+        "type": "cash_sale",
+        "amount": 500.0,
+        "transcript": "داؤد کو پانچ سو روپے میں دو نمک کے پیکٹ دے دو.",
+        "audio_filename": "dawood_20260719_192352.webm",
+        "timestamp": "2026-07-19 19:23:52"
+    }
+]

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Zubaan — The Digital Khata</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .pulse-recording { animation: pulse 1.2s infinite; }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 12px rgba(239, 68, 68, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+        .custom-scrollbar::-webkit-scrollbar { height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans min-h-screen antialiased text-slate-600">
+    <div class="max-w-4xl mx-auto px-3 py-4 md:px-4 md:py-8">
+        
+        <!-- Header Section -->
+        <div class="text-center mb-6 md:mb-8">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-slate-800 tracking-tight">Zubaan Pipeline — <span class="text-indigo-600">Digital Khata</span></h1>
+            <p class="text-xs md:text-sm text-slate-500 mt-2 px-4">Voice-powered khata entries with market noise isolation matrix</p>
+        </div>
+
+        <!-- EXTENDED METRICS BAR CHART ROW -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 mb-6 md:mb-8">
+            <div class="bg-white border border-emerald-100 p-4 md:p-5 rounded-2xl shadow-sm flex flex-col justify-between">
+                <span class="text-[10px] md:text-xs font-bold text-emerald-600 uppercase tracking-wider">Total Cash Received</span>
+                <span id="summaryCash" class="text-2xl md:text-3xl font-black text-slate-800 mt-1 md:mt-2">Rs. 0</span>
+            </div>
+            <div class="bg-white border border-rose-100 p-4 md:p-5 rounded-2xl shadow-sm flex flex-col justify-between">
+                <span class="text-[10px] md:text-xs font-bold text-rose-600 uppercase tracking-wider">Total Udhaar Balance</span>
+                <span id="summaryUdhaar" class="text-2xl md:text-3xl font-black text-slate-800 mt-1 md:mt-2">Rs. 0</span>
+            </div>
+            <div class="bg-white border border-indigo-100 p-4 md:p-5 rounded-2xl shadow-sm flex flex-col justify-between">
+                <span class="text-[10px] md:text-xs font-bold text-indigo-600 uppercase tracking-wider">🔥 Most Demanded Product</span>
+                <span id="summaryTopProduct" class="text-xl md:text-2xl font-black text-indigo-900 mt-1 md:mt-2">Calculating...</span>
+            </div>
+        </div>
+
+        <!-- Main Body Workspace -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            
+            <!-- Audio Controls Panel -->
+            <div class="bg-white p-5 md:p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-between min-h-[340px] md:min-h-[400px]">
+                <div class="w-full">
+                    <h2 class="text-md md:text-lg font-bold text-slate-700 mb-4 border-b pb-2">Audio Controls</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-1 gap-3 md:space-y-4 mb-4">
+                        <div>
+                            <label class="block text-[10px] font-semibold text-slate-500 uppercase mb-1">Shopkeeper Spoke In</label>
+                            <select id="speechLang" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs md:text-sm text-slate-700 focus:outline-indigo-500">
+                                <option value="urdu" selected>Urdu</option>
+                                <option value="english">English</option>
+                                <option value="arabic">Arabic</option>
+                                <option value="punjabi">Punjabi</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-semibold text-slate-500 uppercase mb-1">Response Language</label>
+                            <select id="targetLang" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs md:text-sm text-slate-700 focus:outline-indigo-500">
+                                <option value="Urdu" selected>Urdu</option>
+                                <option value="English">English</option>
+                                <option value="Arabic">Arabic</option>
+                                <option value="Punjabi">Punjabi</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col items-center justify-center flex-grow w-full py-4">
+                    <button id="recordBtn" class="w-20 h-20 md:w-24 md:h-24 bg-indigo-600 text-white rounded-full flex items-center justify-center shadow-lg transition-all hover:bg-indigo-700 active:scale-95 cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 md:h-10 md:w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                        </svg>
+                    </button>
+                    <p id="recordStatus" class="text-xs font-medium text-slate-500 mt-3 hidden text-center">Noise filter active... Speak now</p>
+                </div>
+            </div>
+
+            <!-- Smart Validation Matrix Workspace -->
+            <div class="md:col-span-2 bg-white p-5 md:p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between">
+                <div>
+                    <h2 class="text-md md:text-lg font-bold text-slate-700 mb-4 border-b pb-2">Smart Validation Matrix</h2>
+                    
+                    <div id="loadingState" class="hidden text-center py-16 md:py-20">
+                        <div class="inline-block w-8 h-8 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+                        <p class="text-slate-500 text-xs md:text-sm mt-3 font-medium">Filtering audio & running fast pipeline...</p>
+                    </div>
+
+                    <div id="placeholderState" class="text-center py-20 md:py-24 border-2 border-dashed border-slate-200 rounded-xl">
+                        <p class="text-slate-400 text-xs md:text-sm">Waiting for live audio capture matrix...</p>
+                    </div>
+
+                    <div id="dataCard" class="hidden space-y-4">
+                        <div class="bg-indigo-50/50 border border-indigo-100 p-3.5 rounded-xl">
+                            <h3 class="text-[10px] font-bold text-indigo-700 uppercase mb-1">Extracted Transcript</h3>
+                            <p id="txtTranscript" class="text-xs md:text-sm text-slate-700 font-medium"></p>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Customer Name</label>
+                                <input id="inpCustomer" type="text" class="w-full border border-slate-200 rounded-lg p-2 text-xs md:text-sm text-slate-800 font-medium focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Amount (PKR)</label>
+                                <input id="inpAmount" type="number" class="w-full border border-slate-200 rounded-lg p-2 text-xs md:text-sm text-slate-800 font-bold focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Transaction Type</label>
+                                <select id="inpType" class="w-full border border-slate-200 rounded-lg p-2 text-xs md:text-sm text-slate-800 font-medium focus:outline-none">
+                                    <option value="cash_sale">Cash Received / Sale</option>
+                                    <option value="udhaar">Udhaar / Credit</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Product Items</label>
+                                <input id="inpItem" type="text" class="w-full border border-slate-200 rounded-lg p-2 text-xs md:text-sm text-slate-800 focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div class="bg-emerald-50/50 border border-emerald-100 p-3.5 rounded-xl">
+                            <h3 class="text-[10px] font-bold text-emerald-700 uppercase mb-1">Audio Confirmation Synthesizer</h3>
+                            <p id="txtConfirmation" class="text-xs md:text-sm text-slate-700 italic font-medium"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="actionControls" class="hidden grid grid-cols-2 gap-3 mt-5 pt-4 border-t border-slate-100">
+                    <button id="btnCancel" class="w-full bg-slate-100 text-slate-600 rounded-xl p-2.5 text-xs md:text-sm font-semibold hover:bg-slate-200 transition-colors cursor-pointer">Discard</button>
+                    <button id="btnSave" class="w-full bg-emerald-600 text-white rounded-xl p-2.5 text-xs md:text-sm font-semibold hover:bg-emerald-700 transition-colors shadow-sm cursor-pointer">Confirm & Save</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ledger Logs -->
+        <div class="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-slate-100 mt-6 md:mt-8">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4 border-b pb-3">
+                <h2 class="text-md md:text-lg font-bold text-slate-700">Digital Khata Ledger Logs</h2>
+                <button id="btnExportCSV" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-2.5 rounded-xl shadow-sm flex items-center justify-center gap-1 cursor-pointer transition-colors">
+                    📊 View/Export Daily Excel File
+                </button>
+            </div>
+            <div class="overflow-x-auto custom-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
+                <table class="w-full text-left border-collapse min-w-[600px]">
+                    <thead>
+                        <tr class="bg-slate-50 text-slate-400 text-[10px] font-bold uppercase border-b border-slate-100">
+                            <th class="p-3">Customer</th>
+                            <th class="p-3">Items</th>
+                            <th class="p-3">Type</th>
+                            <th class="p-3">Amount</th>
+                            <th class="p-3 text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ledgerBody" class="text-xs md:text-sm text-slate-600 divide-y divide-slate-100"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let mediaRecorder;
+        let mediaStream; 
+        let currentAudio = null; 
+        let audioChunks = [];
+        let currentAudioFilename = ""; 
+        
+        // Dynamic detection of current host URL (Works on localhost & ngrok domain automatically!)
+        const serverUrl = window.location.origin;
+
+        const recordBtn = document.getElementById("recordBtn");
+        const recordStatus = document.getElementById("recordStatus");
+        const loadingState = document.getElementById("loadingState");
+        const placeholderState = document.getElementById("placeholderState");
+        const dataCard = document.getElementById("dataCard");
+        const actionControls = document.getElementById("actionControls");
+
+        window.addEventListener("DOMContentLoaded", fetchExistingLedger);
+
+        async function fetchExistingLedger() {
+            try {
+                const url = `${serverUrl}/get-ledger?nocache=${new Date().getTime()}`;
+                const res = await fetch(url, { headers: { 'Cache-Control': 'no-store', 'ngrok-skip-browser-warning': 'true' }});
+                if (res.ok) {
+                    const payload = await res.json();
+                    renderLedgerTable(payload.records || []);
+                    document.getElementById("summaryTopProduct").innerText = payload.top_product || "None yet";
+                }
+            } catch (e) { console.error("Database linkage error", e); }
+        }
+
+        recordBtn.addEventListener("click", async () => {
+            if (mediaRecorder && mediaRecorder.state === "recording") {
+                mediaRecorder.stop();
+                recordBtn.classList.remove("bg-rose-600", "hover:bg-rose-700", "pulse-recording");
+                recordBtn.classList.add("bg-indigo-600", "hover:bg-indigo-700");
+                recordStatus.classList.add("hidden");
+            } else {
+                audioChunks = [];
+                try {
+                    mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(mediaStream);
+                    mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+                    
+                    mediaRecorder.onstop = async () => {
+                        mediaStream.getTracks().forEach(track => track.stop());
+                        const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
+                        await processAudioPipeline(audioBlob);
+                    };
+
+                    mediaRecorder.start();
+                    recordBtn.classList.remove("bg-indigo-600", "hover:bg-indigo-700");
+                    recordBtn.classList.add("bg-rose-600", "hover:bg-rose-700", "pulse-recording");
+                    recordStatus.classList.remove("hidden");
+                } catch (micErr) {
+                    alert("Microphone permission required.");
+                }
+            }
+        });
+
+        async function processAudioPipeline(blob) {
+            document.getElementById("txtTranscript").innerText = "";
+            document.getElementById("inpCustomer").value = "";
+            document.getElementById("inpAmount").value = 0;
+            document.getElementById("inpItem").value = "";
+
+            placeholderState.classList.add("hidden");
+            dataCard.classList.add("hidden");
+            actionControls.classList.add("hidden");
+            loadingState.classList.remove("hidden");
+
+            const formData = new FormData();
+            formData.append("audio", blob, "entry.webm");
+            formData.append("speech_language", document.getElementById("speechLang").value);
+            formData.append("target_language", document.getElementById("targetLang").value);
+
+            try {
+                const res = await fetch(`${serverUrl}/process-audio`, { 
+                    method: "POST", 
+                    body: formData,
+                    headers: { 'ngrok-skip-browser-warning': 'true' }
+                });
+                if (!res.ok) throw new Error("Parsing pipeline fault.");
+                const data = await res.json();
+
+                if (!data.success) {
+                    alert(data.error || "Failed to process audio.");
+                    loadingState.classList.add("hidden");
+                    placeholderState.classList.remove("hidden");
+                    return;
+                }
+
+                const txData = data.transaction || data.parsed_data;
+
+                if (txData) {
+                    document.getElementById("txtTranscript").innerText = data.transcript || "Audio Processed";
+                    document.getElementById("inpCustomer").value = txData.customer || "Unknown";
+                    document.getElementById("inpAmount").value = txData.amount || 0;
+                    
+                    const txType = String(txData.type || "").toLowerCase();
+                    if (txType.includes("udhaar") || txType.includes("credit")) {
+                        document.getElementById("inpType").value = "udhaar";
+                    } else {
+                        document.getElementById("inpType").value = "cash_sale";
+                    }
+                    
+                    document.getElementById("inpItem").value = txData.items || "None";
+                    document.getElementById("txtConfirmation").innerText = data.audio_response || "Validated Successfully";
+                    currentAudioFilename = data.audio_filename || "";
+
+                    loadingState.classList.add("hidden");
+                    dataCard.classList.remove("hidden");
+                    actionControls.classList.remove("hidden");
+                }
+            } catch (err) {
+                loadingState.classList.add("hidden");
+                placeholderState.classList.remove("hidden");
+                console.error("Pipeline error:", err);
+                alert("Pipeline error parsing data.");
+            }
+        }
+
+        document.getElementById("btnSave").addEventListener("click", async () => {
+            const entry = {
+                customer: document.getElementById("inpCustomer").value,
+                amount: parseFloat(document.getElementById("inpAmount").value) || 0,
+                type: document.getElementById("inpType").value, 
+                items: document.getElementById("inpItem").value,
+                transcript: document.getElementById("txtTranscript").innerText,
+                audio_filename: currentAudioFilename
+            };
+
+            try {
+                const res = await fetch(`${serverUrl}/save-ledger`, {
+                    method: "POST",
+                    headers: { 
+                        "Content-Type": "application/json",
+                        "ngrok-skip-browser-warning": "true"
+                    },
+                    body: JSON.stringify(entry)
+                });
+                
+                if (res.ok) {
+                    await fetchExistingLedger();
+                    dataCard.classList.add("hidden");
+                    actionControls.classList.add("hidden");
+                    placeholderState.classList.remove("hidden");
+                    currentAudioFilename = "";
+                } else {
+                    const errTxt = await res.text();
+                    alert("Save failed! Server says: " + errTxt);
+                }
+            } catch (e) { alert("Save process error: " + e.message); }
+        });
+
+        document.getElementById("btnCancel").addEventListener("click", () => {
+            dataCard.classList.add("hidden");
+            actionControls.classList.add("hidden");
+            placeholderState.classList.remove("hidden");
+            currentAudioFilename = "";
+        });
+
+        window.playAudioFile = function(filename) {
+            if (!filename) return alert("Audio record unavailable.");
+            if (currentAudio) currentAudio.pause();
+            currentAudio = new Audio(`${serverUrl}/audios/${filename}`);
+            currentAudio.play().catch(err => alert("Playback error."));
+        };
+
+        window.deleteRecord = async function(index) {
+            if (!confirm("Delete permanently?")) return;
+            try {
+                const res = await fetch(`${serverUrl}/delete-ledger/${index}`, { method: "DELETE" });
+                if (res.ok) {
+                    await fetchExistingLedger();
+                }
+            } catch (e) { alert("Deletion runtime link failure."); }
+        };
+
+        document.getElementById("btnExportCSV").addEventListener("click", () => {
+            window.open(`${serverUrl}/get-ledger`, '_blank');
+        });
+
+        function renderLedgerTable(records) {
+            const tbody = document.getElementById("ledgerBody");
+            tbody.innerHTML = "";
+            let totalCash = 0;
+            let totalUdhaar = 0;
+
+            if (!records || records.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-400 italic">No logged entries found</td></tr>`;
+                document.getElementById("summaryCash").innerText = "Rs. 0";
+                document.getElementById("summaryUdhaar").innerText = "Rs. 0";
+                return;
+            }
+
+            records.forEach((r, index) => {
+                const isUdhaar = r.type === "udhaar";
+                if (isUdhaar) totalUdhaar += r.amount; else totalCash += r.amount;
+
+                const badgeClass = isUdhaar ? "bg-rose-100 text-rose-700 border border-rose-200" : "bg-emerald-100 text-emerald-700 border border-emerald-200";
+                const typeText = isUdhaar ? "Udhaar / Credit" : "Cash Received";
+
+                const tr = document.createElement("tr");
+                tr.className = "hover:bg-slate-50/80 transition-colors border-b border-slate-100 text-xs md:text-sm";
+                tr.innerHTML = `
+                    <td class="p-3 font-medium text-slate-800">${r.customer}</td>
+                    <td class="p-3 text-slate-500">${r.items}</td>
+                    <td class="p-3"><span class="px-2 py-0.5 md:py-1 rounded-full text-[10px] font-bold ${badgeClass}">${typeText}</span></td>
+                    <td class="p-3 font-black text-slate-700">Rs. ${r.amount}</td>
+                    <td class="p-3 text-center space-x-2 whitespace-nowrap">
+                        <button onclick="window.playAudioFile('${r.audio_filename}')" class="text-indigo-600 hover:text-indigo-800 font-medium mr-1 md:mr-2 cursor-pointer">🔊 Play</button>
+                        <button onclick="window.deleteRecord(${index})" class="text-rose-600 hover:text-rose-800 font-bold ml-1 md:ml-2 cursor-pointer">❌ Delete</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById("summaryCash").innerText = `Rs. ${totalCash}`;
+            document.getElementById("summaryUdhaar").innerText = `Rs. ${totalUdhaar}`;
+        }
+    </script>
+</body>
+</html>
